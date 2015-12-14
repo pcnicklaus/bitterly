@@ -43,15 +43,94 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
 
 // our controller for the form
 // =============================================================================
-.controller('formController', function($scope) {
+.controller('formController', ['$scope', '$http', '$location', function($scope, $http, $location) {
 
     // we will store all of our form data in this object
     $scope.formData = {};
 
     // function to process the form
     $scope.processForm = function() {
-        alert('awesome!');
+
+        console.log($scope.formData.delivery)
+
+        if ($scope.formData.delivery === "phone") {
+
+            // var holder = userService.user.searchKeyword;
+            // var searchPhrase = holder.replace(' ', '%20');
+
+            // var payload = {
+            //   city:     userService.user.searchState,
+            //   keyword:  searchPhrase
+            // };
+            // console.log(payload, 'payload');
+
+            // $http.post('/scrape', payload)
+            //     .success(function(data) {
+            //         scrapedData = data;
+            //         limitCraig();
+            //     })
+            //     .error(function(err) {
+            //         console.log(err, 'error');
+            //     });
+
+        }
+
+        else if ($scope.formData.delivery === "text") {
+
+            var message     = $scope.formData.message;
+            var number      = '+1' + $scope.formData.text1 + $scope.formData.text2 + $scope.formData.text3;
+            var to          = $scope.formData.name;
+            var from        = $scope.formData.fromName;
+
+            // var from =
+
+            var payload = {
+              messageData: message,
+              number    : number,
+              to        : to,
+              from      : from
+              // from: from
+            };
+
+            console.log(payload, 'payload');
+
+            $http.post('/text', payload)
+                .success(function(data) {
+                    console.log(data);
+                    $scope.messageData = data;
+                })
+                .error(function(err) {
+                    console.log(err, 'error');
+                });
+
+        }
+
+        else if ($scope.formData.delivery === "email") {
+
+
+            var body    = $scope.formData.message;
+            var email   = $scope.formData.email;
+            var to      = $scope.formData.name;
+            var from    = $scope.formData.fromName;
+
+              var payload = {
+                body    : body,
+                email   : email,
+                to      : to,
+                from    : from
+              };
+              console.log(payload);
+
+              $http.post('/mail', payload)
+                    .success(function(data) {
+                        $scope.responseData = data;
+                        console.log(responseData, 'resposne data');
+                    })
+                    .error(function(err) {
+                        console.log(err, 'error');
+                    });
+        }
     };
 
-});
+}]);
 

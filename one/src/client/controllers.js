@@ -1,10 +1,10 @@
 // add controllers
-angular.module('formController', function ($scope) {
+// angular.module('formController', function ($scope) {
 
-  $scope.formData = {};
+//   $scope.formData = {};
 
-  $scope.processForm = function () {
-    alert('awesome');
-  };
+//   $scope.processForm = function () {
+//     alert('awesome');
+//   };
 
-});
+// });

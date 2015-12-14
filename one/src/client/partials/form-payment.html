@@ -1,44 +1,96 @@
-<form>
-<label>How to send</label>
-<div class="form-group">
-    <label for="singleSelect"> Single select: </label><br>
-        <select class="form-control" name="singleSelect" ng-model="data.delivery">
-            <option value="option-1">Phone or Text</option>
-            <option value="option-2">Email</option>
-        </select>
-        <br>
+<form name="sendInfo" novalidate>
+    <label>How to send</label>
+    <div class="form-group">
+        <label for="singleSelect"> Single select: </label><br>
+            <select class="form-control" name="singleSelect" ng-model="formData.delivery">
+                <option value="phone">Phone</option>
+                <option value="text">Text</option>
+                <option value="email">Email</option>
+            </select>
+            <br>
 
-    <div ng-show="data.delivery === 'option-1'">
+        <div ng-show="formData.delivery === 'phone'" ng-required="formData.delivery === 'phone'">
 
-        <br>
-       <input type="text" class="form-control bfh-phone" data-format="+1 (ddd) ddd-dddd" ng-model="formData.phone">
+            <br>
+            <div class="form-group phone-number">
+               <p>Phone</p>
+               <div class="col-xs-3">
+                   <input type="tel" class="form-control" value="" size="3" maxlength="3" ng-model="formData.phone1">
+               </div>
 
-        <br>
+               <div class="col-xs-3">
+                   <input type="tel" class="form-control" value="" size="3" maxlength="3" ng-model="formData.phone2">
+               </div>
 
+
+               <div class="col-xs-4">
+                   <input type="tel" class="form-control" value="" size="4" maxlength="4" ng-model="formData.phone3">
+               </div>
+            </div>
+            <br>
+
+        </div>
+
+        <div ng-show="formData.delivery === 'text'" ng-required="formData.delivery === 'text'">
+
+            <br>
+            <div class="form-group phone-number text-center">
+               <p>Phone</p>
+               <div class="col-xs-3 col-xs-offset-1">
+                   <input type="tel" class="form-control" value="" size="3" maxlength="3" ng-model="formData.text1">
+               </div>
+
+               <div class="col-xs-3">
+                   <input type="tel" class="form-control" value="" size="3" maxlength="3" ng-model="formData.text2">
+               </div>
+
+
+               <div class="col-xs-4">
+                   <input type="tel" class="form-control" value="" size="4" maxlength="4" ng-model="formData.text3">
+               </div>
+            </div>
+            <br>
+
+        </div>
+
+        <div ng-show="formData.delivery  === 'email'" ng-required="data.delivery  === 'email'">
+
+            <br>
+
+            <input type="email" class="form-control" name="email" ng-model="formData.email" placeholder="">
+            <br>
+            <br>
+
+        </div>
+
+        <div ng-show="formData.delivery ==='email' || formData.delivery === 'text' || formData.delivery === 'phone'" class="text-center">
+            <!-- <span class="glyphicon glyphicon-heart"></span>
+         -->
+            <br>
+            <br>
+            <button type="submit" class="btn-block btn-danger">Send</button>
+        </div>
     </div>
 
-    <div ng-show="data.delivery  === 'option-2'">
+    <!-- <div class="form-group row">
+        <div class="col-xs-6 col-xs-offset-3">
+            <a ui-sref="form.payment" class="btn btn-block btn-info">
+            Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+            </a>
+        </div>
+    </div> -->
 
-        <br>
+   <!--  <div class="text-center">
+        <span class="glyphicon glyphicon-heart"></span>
 
-        <input type="email" class="form-control" name="email" ng-model="formData.email" placeholder="">
-        <br>
-        <br>
+        <button type="submit" class="btn btn-danger">Send</button>
+    </div> -->
 
+    <div ng-show="messageData">
+        <p>Your message: {{messageData}}</p>
     </div>
-</div>
 
-<!-- <div class="form-group row">
-    <div class="col-xs-6 col-xs-offset-3">
-        <a ui-sref="form.payment" class="btn btn-block btn-info">
-        Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
-        </a>
+    <div ng-show="messageData">
+        <p>Your message: {{responseData}}</p>
     </div>
-</div> -->
-
-<div class="text-center">
-    <!-- <span class="glyphicon glyphicon-heart"></span>
- -->
-    <button type="submit" class="btn btn-danger">Send</button>
-</div>
 </form>

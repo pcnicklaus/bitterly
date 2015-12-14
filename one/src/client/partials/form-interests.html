@@ -1,18 +1,18 @@
 <div class="form-group">
     <label for="singleSelect"> Single select: </label><br>
-        <select class="form-control" name="singleSelect" ng-model="data.messageType">
-            <option value="option-1">Breakup</option>
-            <option value="option-2">Angry</option>
+        <select class="form-control" name="singleSelect" ng-model="formData.messageType">
+            <option value="breakup">Breakup</option>
+            <option value="angry">Angry</option>
         </select>
         <br>
 
-    <div ng-show="data.messageType === 'option-1'">
+    <div ng-show="formData.messageType === 'breakup'">
 
-        <select class="form-control" name="typeSelect" ng-model="data.message">
-            <option value="option-1">
+        <select class="form-control" name="typeSelect" ng-model="formData.message">
+            <option value="You’re perfect in every way, just not for me">
                 You’re perfect in every way, just not for me.
             </option>
-            <option value="option-2">
+            <option value="Really, our time together has just become more effort than you’re worth.">
                 Really, our time together has just become more effort than you’re worth.
             </option>
         </select>
@@ -20,14 +20,14 @@
 
     </div>
 
-    <div ng-show="data.messageType === 'option-2'">
+    <div ng-show="formData.messageType === 'angry'">
 
-        <select class="form-control" name="typeSelect" ng-model="data.message">
-            <option value="option-1">
+        <select class="form-control" name="typeSelect" ng-model="formData.message">
+            <option value="You must have been born on a highway, because that's where most accidents happen.">
                 You must have been born on a highway, because that's where most accidents happen.
 
             </option>
-            <option value="option-2">
+            <option value="Do you have to leave so soon? I was just about to poison the tea.">
                 Do you have to leave so soon? I was just about to poison the tea.
 
             </option>

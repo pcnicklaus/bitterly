@@ -5,7 +5,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var dotenv = require('dotenv');
+dotenv.load();
 
+
+mongoose.connect(process.env.MONGOLAB_URI || "mongodb://localhost/bitterly");
 
 // *** routes *** //
 var routes = require('./routes/index.js');
@@ -25,6 +30,10 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 // *** main routes *** //
 app.use('/', routes);
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../../client/index.html'));
+});
 
 
 // catch 404 and forward to error handler
