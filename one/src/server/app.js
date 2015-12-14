@@ -7,6 +7,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var dotenv = require('dotenv');
+var swig = require('swig');
+
 dotenv.load();
 
 
@@ -18,6 +20,16 @@ var routes = require('./routes/index.js');
 
 // *** express instance *** //
 var app = express();
+
+
+// *** view engine *** //
+var swig = new swig.Swig();
+app.engine('html', swig.renderFile);
+app.set('view engine', 'html');
+
+
+// *** static directory *** //
+app.set('views', path.join(__dirname, 'views'));
 
 
 // *** config middleware *** //

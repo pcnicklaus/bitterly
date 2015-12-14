@@ -64,14 +64,13 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
             // };
             // console.log(payload, 'payload');
 
-            // $http.post('/scrape', payload)
-            //     .success(function(data) {
-            //         scrapedData = data;
-            //         limitCraig();
-            //     })
-            //     .error(function(err) {
-            //         console.log(err, 'error');
-            //     });
+            $http.post('/call')
+                .success(function(data) {
+                    console.log(data, '');
+                })
+                .error(function(err) {
+                    console.log(err, 'error');
+                });
 
         }
 
@@ -85,7 +84,7 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
             // var from =
 
             var payload = {
-              messageData: message,
+              message   : message,
               number    : number,
               to        : to,
               from      : from
@@ -124,7 +123,7 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
               $http.post('/mail', payload)
                     .success(function(data) {
                         $scope.responseData = data;
-                        console.log(responseData, 'resposne data');
+                        console.log($scope.responseData, 'resposne data');
                     })
                     .error(function(err) {
                         console.log(err, 'error');
