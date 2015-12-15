@@ -11,34 +11,46 @@ var config = require('../../_config.js');
 require('dotenv').load();
 
 
-router.get('/', function(req, res, next) {
+// router.get('/', function(req, res, next) {
 
-  var capability = new twilio.Capability(
-    config.accountSid,
-    config.authToken
-  );
+//   var capability = new twilio.Capability(
+//     config.accountSid,
+//     config.authToken
+//   );
 
-  capability.allowClientOutgoing(config.appToken);
+//   capability.allowClientOutgoing(config.appToken);
 
-  res.render('index', {
-      token: capability.generate(),
-      twilioNumber: config.TWILIO_NUMBER
-  });
+//   res.render('index', {
+//       token: capability.generate(),
+//       twilioNumber: config.TWILIO_NUMBER
+//   });
 
-});
+// });
 
 
 router.post('/call', function(req, res, next){
 
+    // client.makeCall({
+
+    //     to:'+16515556677', // Any number Twilio can call
+    //     from: '+14506667788', // A number you bought from Twilio and can use for outbound communication
+    //     url: 'http://www.example.com/twiml.php' // A URL that produces an XML document (TwiML) which contains instructions for the call
+
+    // }, function(err, responseData) {
+
+    //     //executed when the call has been initiated.
+    //     console.log(responseData); // outputs "+14506667788"
+
+    // });
 
     client.calls.create({
         url: "http://demo.twilio.com/docs/voice.xml",
-        to: "client:tommy",
-        from: "+12243884883"
+        to: "+12243884883",
+        from: "+17204109095"
     }, function(err, call) {
         console.log(err, 'error');
         console.log(call, ' call');
-        process.stdout.write(call.sid);
+        // process.stdout.write(call.sid);
     });
 
     // var phoneNumber = '+12243884883';
@@ -133,53 +145,42 @@ router.post('/mail', function (req, res, next) {
 });
 
 
-client.calls.create({
-    url: "http://demo.twilio.com/docs/voice.xml",
-    to: "client:tommy",
-    from: "+14158675309"
-}, function(err, call) {
-    process.stdout.write(call.sid);
-});
+// client.calls.create({
+//     url: "http://demo.twilio.com/docs/voice.xml",
+//     to: "client:tommy",
+//     from: "+14158675309"
+// }, function(err, call) {
+//     process.stdout.write(call.sid);
+// });
 
 
-router.post('/call', function (req, res, next) {
+// router.post('/call', function (req, res, next) {
 
-    // console.log(' req.body.title   ', req.body.title[0].description)
-    var body    = req.body.body;
-    var email   = req.body.email;
-    var to      = req.body.to;
-    var from    = req.body.from;
+//     // console.log(' req.body.title   ', req.body.title[0].description)
+//     var body    = req.body.body;
+//     var email   = req.body.email;
+//     var to      = req.body.to;
+//     var from    = req.body.from;
 
-    console.log(req.body, '<==== req.body')
+//     console.log(req.body, '<==== req.body')
 
-    console.log('body >', body, 'email >', email, 'from >', from, 'to >', to);
+//     console.log('body >', body, 'email >', email, 'from >', from, 'to >', to);
 
-    // client.calls.create({
-    //     url: "http://demo.twilio.com/docs/voice.xml",
-    //     to: "client:tommy",
-    //     from: "+14158675309"
-    // }, function(err, call) {
-    //     process.stdout.write(call.sid);
-    // });
+//     // client.calls.create({
+//     //     url: "http://demo.twilio.com/docs/voice.xml",
+//     //     to: "client:tommy",
+//     //     from: "+14158675309"
+//     // }, function(err, call) {
+//     //     process.stdout.write(call.sid);
+//     // });
 
-});
+// });
 
 // twilio phone info
 // SID
 // PN30d7b6a74c573876ac56f911ec0da844
 // Phone Number
 // +17204109095
-
-// AccountSID
-
-// Used to exercise the REST API
-// AC4fecf408b1281cd3fccb5e5b38a521fc
-
-// AuthToken (Request a Secondary Token)
-
-
-// 6efff6c990af323159a7b43a4d613fd5
-
 
 // router.get('/', function(req, res) {
 //   res.sendFile(path.join(__dirname, '../../client', 'index.html'));
