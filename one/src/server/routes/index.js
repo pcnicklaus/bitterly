@@ -11,37 +11,7 @@ var config = require('../../_config.js');
 require('dotenv').load();
 
 
-// router.get('/', function(req, res, next) {
-
-//   var capability = new twilio.Capability(
-//     config.accountSid,
-//     config.authToken
-//   );
-
-//   capability.allowClientOutgoing(config.appToken);
-
-//   res.render('index', {
-//       token: capability.generate(),
-//       twilioNumber: config.TWILIO_NUMBER
-//   });
-
-// });
-
-
 router.post('/call', function(req, res, next){
-
-    // client.makeCall({
-
-    //     to:'+16515556677', // Any number Twilio can call
-    //     from: '+14506667788', // A number you bought from Twilio and can use for outbound communication
-    //     url: 'http://www.example.com/twiml.php' // A URL that produces an XML document (TwiML) which contains instructions for the call
-
-    // }, function(err, responseData) {
-
-    //     //executed when the call has been initiated.
-    //     console.log(responseData); // outputs "+14506667788"
-
-    // });
 
     client.calls.create({
         url: "http://demo.twilio.com/docs/voice.xml",
@@ -50,7 +20,7 @@ router.post('/call', function(req, res, next){
     }, function(err, call) {
         console.log(err, 'error');
         console.log(call, ' call');
-        // process.stdout.write(call.sid);
+        process.stdout.write(call.sid);
     });
 
     // var phoneNumber = '+12243884883';
