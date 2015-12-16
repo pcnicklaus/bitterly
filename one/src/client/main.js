@@ -9,6 +9,11 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
 
     $stateProvider
 
+        .state('home', {
+            url: '/home',
+            templateUrl: 'partials/home.html',
+            controller: 'formController'
+        })
         // route to show our basic form (/form)
         .state('form', {
             url: '/form',

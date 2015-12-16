@@ -133,3 +133,48 @@ pre {
 {
   background: none !important;
 }*/
+
+
+.banner
+{
+  /*background:linear-gradient(
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)
+    ), url(./public/bigstock-Vintage-Movie-Ending-Screen-37878040.jpg) no-repeat fixed;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size:cover;
+  background-size: cover;*/
+  padding: 30px 0px 0px 0px;
+  /*background-color: #3d454a;*/
+  cursor: default;
+}
+.banner-text
+{
+  width: 70%;
+  margin: 0 auto;
+  /*padding:80px 0px;*/
+}
+.banner-text h2
+{
+  color: #fff;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1.5;
+  padding-left: 40px;
+}
+.banner-text h2 span
+{
+  font-weight: 400;
+}
+p.under-tagline
+{
+  color: #FFF;
+  font-size: 18px;
+  line-height: 30px;
+  font-weight: 300;
+  margin-top: 150px;
+  /*background: rgba(170, 170, 170, .6);*/
+  padding-top: 0px;
+  padding-left: 40px;
+}
