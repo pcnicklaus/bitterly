@@ -5,16 +5,52 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/darkly/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:700italic|Niconne|Norican' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="public/css/main.css">
 
     <!-- JS -->
     <!-- load angular, nganimate, and ui-router -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.min.js"></script>
-    <script src="./main.js"></script>
+
+    <!-- // <script type="text/javascript" src="js/smoothscroll.js"></script> -->
+
 
 </head>
+        <div id="nav">
+        <nav class="navbar navbar-default navbar-fixed-top">
+               <div class="container-fluid">
+                   <!-- Brand and toggle get grouped for better mobile display -->
+                   <div class="navbar-header page-scroll">
+                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                           <span class="sr-only">Toggle navigation</span>
+                           <span class="icon-bar"></span>
+                           <span class="icon-bar"></span>
+                           <span class="icon-bar"></span>
+                       </button>
+                       <a class="navbar-brand" href="index.html">Bitterly</a>
+                   </div>
+
+                   <!-- Collect the nav links, forms, and other content for toggling -->
+                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                       <ul class="nav navbar-nav navbar-right">
+                           <li>
+                               <a href="index.html">Home</a>
+                           </li>
+                           <li>
+                               <a href="about.html">About</a>
+                           </li>
+                           <li>
+                               <a href="post.html">Sample Post</a>
+                           </li>
+                           <li>
+                               <a href="contact.html">Contact</a>
+                           </li>
+                       </ul>
+                   </div>
+                   <!-- /.navbar-collapse -->
+               </div>
+               <!-- /.container -->
+           </nav>
+        </div>
 <body ng-app="formApp">
 
 <!-- views will be injected here -->
@@ -22,7 +58,16 @@
     <div ui-view></div>
 </div>
 
+    <!-- jQuery -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.min.js"></script>
+    <script src="./main.js"></script>
 
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 </body>
 </html>

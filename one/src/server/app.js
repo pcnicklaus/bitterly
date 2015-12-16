@@ -7,9 +7,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var dotenv = require('dotenv');
-var swig = require('swig');
-
 dotenv.load();
+
+
+var swig = require('swig');
+var twilioAPI = require('twilio-api');
+var cli = new twilioAPI.Client(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+
+
 
 
 mongoose.connect(process.env.MONGOLAB_URI || "mongodb://localhost/bitterly");
@@ -38,7 +43,33 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client')));
+app.use(cli.middleware() );
 
+
+app.post('/call', function(req, res, next){
+
+      if (twilio.validateExpressRequest(req, config.authToken)) {
+          var resp = new twilio.TwimlResponse();
+          resp.say('express sez - hello twilio!');
+
+          res.type('text/xml');
+          res.send(resp.toString());
+
+          // client.calls.create({
+
+          //     to: "+12243884883",
+          //     from: "+17204109095"
+          // }, function(err, call) {
+          //     // console.log(err, 'error');
+          //     // console.log(call, ' call');
+          //     process.stdout.write(call.sid);
+          // });
+      }
+      else {
+          res.send('you are not twilio.  Buzz off.');
+      }
+
+});
 
 // *** main routes *** //
 app.use('/', routes);

@@ -8,19 +8,32 @@ var js2xml = require('js2xmlparser');
 var twilio = require('twilio');
 
 var config = require('../../_config.js');
+
+var twilioAPI = require('twilio-api'),
+    cli = new twilioAPI.Client(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+
+
+var config = require('../../_config.js');
 require('dotenv').load();
 
 
 router.post('/call', function(req, res, next){
 
-    client.calls.create({
-        url: "http://demo.twilio.com/docs/voice.xml",
-        to: "+12243884883",
-        from: "+17204109095"
-    }, function(err, call) {
-        console.log(err, 'error');
-        console.log(call, ' call');
-        process.stdout.write(call.sid);
+    cli.account.getApplication(process.env.TWILIO_APP_TOKEN, function(err, app) {
+        if(err) throw err;
+        console.log(app, "<==== app")
+        app.register();
+
+        app.makeCall("+12243884883", "+15555555555", function(err, call) {
+            if(err) throw err;
+            call.on('connected', function(status) {
+                //Called when the caller picks up
+                call.say("This is a test. Goodbye!");
+            });
+            call.on('ended', function(status, duration) {
+                //Called when the call ends
+            });
+        });
     });
 
     // var phoneNumber = '+12243884883';
@@ -37,7 +50,24 @@ router.post('/call', function(req, res, next){
     //   }
     // };
 
-    // res.header('Content-Type','text/xml').send(js2xml('Response', callData));
+    // var x = res.header('Content-Type','text/xml').send(js2xml('Response', callData));
+
+    // var y = Object.create(x);
+    // console.log('y =====>', y)
+
+    // console.log('x ====>', x)
+
+    // client.calls.create({
+    //     url: y,
+    //     to: "+12243884883",
+    //     from: "+17204109095"
+    // }, function(err, call) {
+    //     // console.log(err, 'error');
+    //     // console.log(call, ' call');
+    //     process.stdout.write(call.sid);
+    // });
+
+
 });
 
 
