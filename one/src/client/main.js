@@ -60,24 +60,29 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
 
         if ($scope.formData.delivery === "phone") {
 
-            // var holder = userService.user.searchKeyword;
-            // var searchPhrase = holder.replace(' ', '%20');
+            var message     = $scope.formData.message;
+            var number      = '+1' + $scope.formData.phone1 + $scope.formData.phone2 + $scope.formData.phone3;
+            var to          = $scope.formData.name;
+            var from        = $scope.formData.fromName;
 
-            // var payload = {
-            //   city:     userService.user.searchState,
-            //   keyword:  searchPhrase
-            // };
-            // console.log(payload, 'payload');
+            var payload = {
+              message   : message,
+              number    : number,
+              to        : to,
+              from      : from
+            };
 
-            $http.post('/call')
+            console.log(payload, "front end payload")
+
+            $http.post('/phone', payload)
                 .success(function(data) {
-                    console.log(data, '');
+                    console.log(data, 'data received from call');
                 })
                 .error(function(err) {
                     console.log(err, 'error');
                 });
-
         }
+
 
         else if ($scope.formData.delivery === "text") {
 
@@ -93,7 +98,6 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
               number    : number,
               to        : to,
               from      : from
-              // from: from
             };
 
             console.log(payload, 'payload');
@@ -125,14 +129,14 @@ angular.module('formApp', ['ngAnimate', 'ui.router'])
               };
               console.log(payload);
 
-              $http.post('/mail', payload)
-                    .success(function(data) {
-                        $scope.responseData = data;
-                        console.log($scope.responseData, 'resposne data');
-                    })
-                    .error(function(err) {
-                        console.log(err, 'error');
-                    });
+            $http.post('/mail', payload)
+                .success(function(data) {
+                    $scope.responseData = data;
+                    console.log($scope.responseData, 'resposne data');
+                })
+                .error(function(err) {
+                    console.log(err, 'error');
+                });
         }
     };
 
