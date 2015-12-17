@@ -15,7 +15,7 @@ call.triggerCall = function(to, from, number, message, callback) {
     number: number,
     message: message,
     from: '+17204109095',
-    url: 'http://127.0.0.1/call/' + (Math.ceil((Math.random() * 10) % 2))
+    url: 'http://127.0.0.1/phone/' + (Math.ceil((Math.random() * 10) % 2))
 
   }, function(error, response) {
 

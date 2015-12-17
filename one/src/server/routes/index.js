@@ -16,7 +16,30 @@ var config = require('../../_config.js');
 var config = require('../../_config.js');
 require('dotenv').load();
 
+router.post('/text', function(req, res, next) {
 
+    console.log('in text')
+    console.log(req.body)
+    var number  = req.body.number;
+    var to      = req.body.to;
+    var message = req.body.message;
+    var from    = req.body.from;
+
+    console.log(message, ' message')
+
+    client.sendMessage({
+
+            to: number,
+            from: '+17204109095',
+            body: to + ', ' + message + '. Sincerely, ' + from
+
+        }, function(err, responseData) {
+
+            if (!err) {
+                res.send(responseData);
+            }
+    });
+});
 
 router.post('/phone', function(req, res, next){
 
@@ -64,29 +87,7 @@ router.post('/:id', function(req, res) {
 
 
 
-router.post('/text', function(req, res, next) {
 
-    console.log(req.body)
-    var number  = req.body.number;
-    var to      = req.body.to;
-    var message = req.body.message;
-    var from    = req.body.from;
-
-    console.log(message, ' message')
-
-    client.sendMessage({
-
-            to: number,
-            from: '+17204109095',
-            body: to + ', ' + message + '. Sincerely, ' + from
-
-        }, function(err, responseData) {
-
-            if (!err) {
-                res.send(responseData);
-            }
-    });
-});
 
 
 router.post('/mail', function (req, res, next) {
