@@ -66,7 +66,7 @@ router.post('/phone', function(req, res, next){
 });
 
 
-router.post('/:id', function(req, res) {
+router.post('phone/:id', function(req, res) {
   // var twilio = require('twilio');
   var twiml = new twilio.TwimlResponse();
 
@@ -86,7 +86,40 @@ router.post('/:id', function(req, res) {
 });
 
 
+router.post('/voice', function (req, res, next) {
 
+  var body  = req.body.body;
+  var email = req.body.email;
+  var to    = req.body.to;
+  var from  = req.body.from;
+
+  var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'bitterlymessage@gmail.com',
+            pass: process.env.GOOGLE
+        }
+    });
+
+      var mailOptions = {
+        from: 'Bitterly ✔ <bitterlymessage@gmail.com>', // sender address
+        to: email, // list of receivers
+        subject: 'You have a message from ' + from, // Subject line
+        text: body, // plaintext body
+        html: '<b>' + body + ' ✔</b>' // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            return console.log(error);
+        } else {
+            res.send(info);
+        }
+        console.log('Message sent: ' + info.response);
+    });
+
+})
 
 
 
