@@ -6,6 +6,9 @@ var client      = require('twilio')(process.env.TWILIOSID, process.env.TWILIOTOK
 // var resp = new twilio.TwimlResponse();
 var js2xml = require('js2xmlparser');
 var twilio = require('twilio');
+var tropo = require('simple-tropo')({
+    token    : "11f28a446fe0f34cad258dc017084a53a669e201bf6acf47be1fd6bebe71cb3c8597b8cd6d49ec1301c926c2"
+  });
 
 var config = require('../../_config.js');
 
@@ -41,49 +44,106 @@ router.post('/text', function(req, res, next) {
     });
 });
 
-router.post('/phone', function(req, res, next){
+// router.post('/phone', function(req, res, next){
 
-    console.log('hereeeeeeee')
-    var resp = {};
-    var call = req.body;
+//     console.log('hereeeeeeee')
+//     var resp = {};
+//     var call = req.body;
 
-    console.log('req.body /phone rt ====>', call)
+//     console.log('req.body /phone rt ====>', call)
 
 
-    var twClient = require('../twilio/call').triggerCall(call.to, call.from, call.number, call.message, function(error, response) {
-      if (error) {
-        // resp.status = "error";
-        // resp.response = error;
-        console.log('<== error in phone route', error)
-      }
-      // else {
-      //   resp.status = "success";
-      //   resp.response = response.sid;
-      // }
+//     var twClient = require('../twilio/call').triggerCall(call.to, call.from, call.number, call.message, function(error, response) {
+//       if (error) {
+//         // resp.status = "error";
+//         // resp.response = error;
+//         console.log('<== error in phone route', error)
+//       }
+//       // else {
+//       //   resp.status = "success";
+//       //   resp.response = response.sid;
+//       // }
 
-      res.json(response);
-    });
+//       res.json(response);
+//     });
+// });
+
+
+router.post('/phone', function (req, res, next) {
+
+  // var number  = req.body.number;
+  // var to      = req.body.to;
+  // var from    = req.body.from;
+  // var message = req.body.message;
+  // var token = '11f28a446fe0f34cad258dc017084a53a669e201bf6acf47be1fd6bebe71cb3c8597b8cd6d49ec1301c926c2';
+
+    call(['+12243884883'], {
+     timeout:120,
+     callerID:'14075550100',
+        onAnswer: function() {
+         say("Tag, you're it!");
+         log("Obnoxious call complete");
+     },
+     onTimeout: function() {
+         log("Call timed out");
+     },
+     onCallFailure: function() {
+         log("Call could not be completed as dialed");
+     }
+  });
+
+  // tropo.send({ //type:'message' - (SMS) is default
+  //    type   : 'message',
+  //    to     : "+12243884883",
+  //    say    : "your message"
+  // },function(err, res){
+  //   console.log("message was delivered")
+  // })
+  // request({
+  //   method: 'POST',
+  //   url: 'https://api.tropo.com/1.0/sessions?action=create&token=' + token + '&numberToDial=' + number + '&customerName=' + req.body.name + '&msg=the+sky+is+falling'
+  // }, function(err, response){
+  //   if(err){
+  //     console.log('err', err);
+  //     res.json(err);
+  //   } else {
+
+  //     var result = JSON.parse(response.body).keywords;
+  //     // console.log(response.body);
+  //     // console.log(response.body.status, "STATUS");
+  //     console.log(result, "RESULT");
+  //     res.json(result);
+  //     // res.render('index', {keywords: result[0].text});
+  //     // res.send(result);
+
+  //   }
+  // });
+
+// 'http://gateway-a.watsonplatform.net/calls/text/TextGetRankedKeywords?text='+cleaned2+'&apikey=' + process.env.ALCHEMY + '&outputMode=json&sentiment=1&showSourceText=1'
+
+//   https://api.tropo.com/1.0/sessions?action=create&token=TOKEN&numberToDial=14075551212&customerName=John+Dyer&msg=the+sky+is+falling
+
+
 });
 
+// router.get('/phone', function(req, res, next){
 
-router.get('/phone', function(req, res, next){
+//     var phoneNumber = '2243884883';
 
-    var phoneNumber = '2243884883';
+//     var callData = {
+//       'Dial': {
+//         '@': {
+//           'action' : '/forward?Dial=true',
+//           'callerId': 'XXXXXXXXXX'
+//         },
+//         'Number': {
+//           '#' : phoneNumber
+//         }
+//       }
+//     };
 
-    var callData = {
-      'Dial': {
-        '@': {
-          'action' : '/forward?Dial=true',
-          'callerId': 'XXXXXXXXXX'
-        },
-        'Number': {
-          '#' : phoneNumber
-        }
-      }
-    };
-
-    res.header('Content-Type','text/xml').send(js2xml('Response', callData));
-});
+//     res.header('Content-Type','text/xml').send(js2xml('Response', callData));
+// });
 
 
 // router.post('phone/:id', function(req, res) {
