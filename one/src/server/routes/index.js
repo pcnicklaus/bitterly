@@ -66,24 +66,44 @@ router.post('/phone', function(req, res, next){
 });
 
 
-router.post('phone/:id', function(req, res) {
-  // var twilio = require('twilio');
-  var twiml = new twilio.TwimlResponse();
+router.get('/phone', function(req, res, next){
 
-  console.log('req.body in id route====>', req.body)
+    var phoneNumber = '2243884883';
 
-  var options = {
-    voice: 'woman',
-    language: 'en-gb'
-  };
+    var callData = {
+      'Dial': {
+        '@': {
+          'action' : '/forward?Dial=true',
+          'callerId': 'XXXXXXXXXX'
+        },
+        'Number': {
+          '#' : phoneNumber
+        }
+      }
+    };
 
-  twiml.say('Hello' + req.body.toName + '! This messge is from' + req.body.fromName +'. ' + req.body.message, options);
-
-  res.writeHead(200, {
-    'Content-Type': 'text/xml'
-  });
-  res.end(twiml.toString());
+    res.header('Content-Type','text/xml').send(js2xml('Response', callData));
 });
+
+
+// router.post('phone/:id', function(req, res) {
+//   // var twilio = require('twilio');
+//   var twiml = new twilio.TwimlResponse();
+
+//   console.log('req.body in id route====>', req.body)
+
+//   var options = {
+//     voice: 'woman',
+//     language: 'en-gb'
+//   };
+
+//   twiml.say('Hello' + req.body.toName + '! This messge is from' + req.body.fromName +'. ' + req.body.message, options);
+
+//   res.writeHead(200, {
+//     'Content-Type': 'text/xml'
+//   });
+//   res.send(twiml.toString());
+// });
 
 
 router.post('/voice', function (req, res, next) {
