@@ -1,9 +1,9 @@
 <form name="sendInfo" novalidate>
-    <label>How to send</label>
+    <label>How do you want it delivered?</label>
     <div class="form-group">
-        <label for="singleSelect"> Single select: </label><br>
+        <label for="singleSelect"></label><br>
             <select class="form-control" name="singleSelect" ng-model="formData.delivery">
-                <option value="phone">Phone</option>
+                <!-- <option value="phone">Phone</option> -->
                 <option value="text">Text</option>
                 <option value="email">Email</option>
             </select>
@@ -33,20 +33,19 @@
 
         <div ng-show="formData.delivery === 'text'" ng-required="formData.delivery === 'text'">
 
-            <br>
             <div class="form-group phone-number text-center">
                <p>Phone</p>
-               <div class="col-xs-3 col-xs-offset-1">
-                   <input type="tel" class="form-control" value="" size="3" maxlength="3" ng-model="formData.text1">
+               <div class="col-xs-2 col-xs-offset-3">
+                   <input type="tel" class="form-control" value="" size="3" maxlength="3" ng-model="formData.text1" placeholder="555">
                </div>
 
-               <div class="col-xs-3">
-                   <input type="tel" class="form-control" value="" size="3" maxlength="3" ng-model="formData.text2">
+               <div class="col-xs-2">
+                   <input type="tel" class="form-control" value="" size="3" maxlength="3" ng-model="formData.text2" placeholder="555">
                </div>
 
 
-               <div class="col-xs-4">
-                   <input type="tel" class="form-control" value="" size="4" maxlength="4" ng-model="formData.text3">
+               <div class="col-xs-2">
+                   <input type="tel" class="form-control" value="" size="4" maxlength="4" ng-model="formData.text3" placeholder="5555">
                </div>
             </div>
             <br>
@@ -57,18 +56,21 @@
 
             <br>
 
-            <input type="email" class="form-control" name="email" ng-model="formData.email" placeholder="">
-            <br>
-            <br>
+            <input type="email" class="form-control" name="email" ng-model="formData.email" placeholder="somebody@gmail.com">
+
 
         </div>
 
         <div ng-show="formData.delivery ==='email' || formData.delivery === 'text' || formData.delivery === 'phone'" class="text-center">
             <!-- <span class="glyphicon glyphicon-heart"></span>
          -->
-            <br>
-            <br>
-            <button type="submit" class="btn-block btn-danger">Send</button>
+
+            <div class="col-xs-6 col-xs-offset-3">
+              <br>
+              <button type="submit" class="btn btn-block btn-info">
+              Send <span class="glyphicon glyphicon-circle-arrow-right"></span>
+              </button>
+            </div>
         </div>
     </div>
 

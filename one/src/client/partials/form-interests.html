@@ -1,6 +1,8 @@
 <div class="form-group">
-    <label for="singleSelect"> Single select: </label><br>
+    <label for="singleSelect"> What kinda Bitterly do you want to send? </label><br>
+    <br>
         <select class="form-control" name="singleSelect" ng-model="formData.messageType">
+            <!-- <option selected disabled>Choose here</option> -->
             <option value="breakup">Breakup</option>
             <option value="angry">Angry</option>
         </select>
@@ -9,6 +11,7 @@
     <div ng-show="formData.messageType === 'breakup'">
 
         <select class="form-control" name="typeSelect" ng-model="formData.message">
+            <!-- <option selected>Choose here</option> -->
             <option value="You’re perfect in every way, just not for me">
                 You’re perfect in every way, just not for me.
             </option>
@@ -23,6 +26,7 @@
     <div ng-show="formData.messageType === 'angry'">
 
         <select class="form-control" name="typeSelect" ng-model="formData.message">
+            <!-- <option selected disabled>Choose here</option> -->
             <option value="You must have been born on a highway, because that's where most accidents happen.">
                 You must have been born on a highway, because that's where most accidents happen.
 
